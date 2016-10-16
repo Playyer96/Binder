@@ -6,50 +6,55 @@ public class Character : MonoBehaviour
 {
 	private Vector3 dir;
 
+    [SerializeField]
+    private float speedMultiplier;
+    [SerializeField]
+    private float speedIncreaseMilestone;
 	[SerializeField]
 	private float speed;
-	[SerializeField]
-	private GameObject textStart;
-	[SerializeField]
-	private GameObject textControls;
 
 
-	public MonoBehaviour shootLeft;
-	public MonoBehaviour shootRight;
+	private float speedStore;
+	private float speedMilestoneCount;
+	private float speedMilestoneCountStore;
+	private float speedIncreaseMilestoneStore;
 
-    // Use this for initialization
+	public GameManager theGameManager;
+
     void Start()
     {
-        dir = Vector3.zero;
-        shootLeft.enabled = false;
-        shootRight.enabled = false;
-		textStart.SetActive (true);
-		textControls.SetActive (false);
+		dir = Vector3.left;
+		speedStore = speed;
+		speedMilestoneCountStore = speedMilestoneCount;
+		speedIncreaseMilestoneStore = speedIncreaseMilestone;
     }
-
-    // Update is called once per frame
+		
     void Update()
     {
+        if (transform.position.z > speedMilestoneCount)
+        {
+            speedMilestoneCount += speedIncreaseMilestone;
+            speedIncreaseMilestone += speedIncreaseMilestone * speedMultiplier;
+            speed = speed * speedMultiplier;
+        }
         if (Input.GetMouseButtonDown(0))
         {
-            if (dir == Vector3.forward)
-            {
-                dir = Vector3.left;
-                shootLeft.enabled = true;
-                shootRight.enabled = false;
-				textStart.SetActive (false);
-				textControls.SetActive (true);
-            }
-            else
-            {
-                dir = Vector3.forward;
-                shootRight.enabled = true;
-                shootLeft.enabled = false;
-				textStart.SetActive (false);
-				textControls.SetActive (true);
-            }
+			if (dir == Vector3.forward) {
+				dir = Vector3.left;
+
+			} else {
+				dir = Vector3.forward;
+			}
         }
         float autoMove = speed * Time.deltaTime;
         transform.Translate(dir * autoMove);
     }
+	void OnCollisionEnter (Collision other){
+		if (other.gameObject.tag == "Wall") {
+			theGameManager.RestartGame();
+			speed = speedStore;
+			speedMilestoneCount = speedMilestoneCountStore;
+			speedIncreaseMilestone = speedIncreaseMilestoneStore;
+		}
+	}
 }
