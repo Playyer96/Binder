@@ -17,7 +17,6 @@ public class Shoot : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("disparo");
             Shoots();
         }
     }

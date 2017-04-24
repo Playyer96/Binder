@@ -51,6 +51,7 @@ public class Character : MonoBehaviour
     }
 	void OnCollisionEnter (Collision other){
 		if (other.gameObject.tag == "Wall") {
+            GetComponent<Shoot>().enabled = false;
 			theGameManager.RestartGame();
 			speed = speedStore;
 			speedMilestoneCount = speedMilestoneCountStore;

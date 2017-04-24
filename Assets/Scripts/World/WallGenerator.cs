@@ -42,7 +42,7 @@ public class WallGenerator : MonoBehaviour {
     {
         if (Random.Range(0f, 100f) < randomCoinThreshold)
         {
-            theCoinGenerator.SpawnCoins(new Vector3(Random.Range(-15, -3), transform.position.y, transform.position.z));
+            theCoinGenerator.SpawnCoins(new Vector3(Random.Range(-10, -6), transform.position.y, transform.position.z));
         }
     }
 
@@ -50,7 +50,7 @@ public class WallGenerator : MonoBehaviour {
     {
         if (Random.Range(0f, 100f) < randomCoinThreshold)
         {
-            theObstacleGenerator.SpawnObstacles(new Vector3(Random.Range(-15, -3), transform.position.y, transform.position.z));
+            theObstacleGenerator.SpawnObstacles(new Vector3(Random.Range(-10, -6), transform.position.y, transform.position.z));
         }
     }
 
@@ -58,7 +58,7 @@ public class WallGenerator : MonoBehaviour {
     {
         if (Random.Range(0f, 100f) < randomCoinThreshold / 2)
         {
-            thePowerUpGenerator.SpawnPowerUp(new Vector3(Random.Range(-15, -3), transform.position.y, transform.position.z));
+            thePowerUpGenerator.SpawnPowerUp(new Vector3(Random.Range(-10, -6), transform.position.y, transform.position.z));
         }
     }
 }
