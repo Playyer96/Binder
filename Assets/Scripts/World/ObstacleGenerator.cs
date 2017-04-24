@@ -8,7 +8,7 @@ public class ObstacleGenerator : MonoBehaviour {
 	[SerializeField]
 	private float distanceBetweenCoins;
 
-	public void SpawnCoins(Vector3 startPosition){
+	public void SpawnObstacles(Vector3 startPosition){
 		GameObject coin1 = coinPool.GetPooledObject ();
 		coin1.transform.position = startPosition;
 		coin1.SetActive (true);

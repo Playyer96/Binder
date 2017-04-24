@@ -3,10 +3,8 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	public Transform wallGeneratorLeft;
-	private Vector3 wallsStartPointLeft;
-	public Transform wallGeneratorRight;
-	private Vector3 wallsStartPointRight;
+	public Transform wallGenerator;
+	private Vector3 wallsStartPoint;
 
 	public Character thePlayer;
 	private Vector3 playerStartPoint;
@@ -17,9 +15,11 @@ public class GameManager : MonoBehaviour {
 
 	public DeathMenu theDeathScreen;
 
+    [SerializeField]
+    private GameObject highScoreTexts;
+
 	void Start () {
-		wallsStartPointLeft = wallGeneratorLeft.position;
-		wallsStartPointRight = wallGeneratorRight.position;
+		wallsStartPoint = wallGenerator.position;
 		playerStartPoint = thePlayer.transform.position;
 
 		theScoreManager = FindObjectOfType<ScoreManager> ();
@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour {
 		theScoreManager.scoreIncreasing = false;
 		thePlayer.gameObject.SetActive (false);
 		theDeathScreen.gameObject.SetActive (true);
-		//StartCoroutine ("RestartGameCo");
+        theScoreManager.NewHighScore();
+        highScoreTexts.gameObject.SetActive(true);
+
 	}
 
 	public void Reset(){
@@ -38,27 +40,10 @@ public class GameManager : MonoBehaviour {
 			wallList [i].gameObject.SetActive (false);
 		}
 		thePlayer.transform.position = playerStartPoint;
-		wallGeneratorLeft.position = wallsStartPointLeft;
-		wallGeneratorRight.position = wallsStartPointRight;
+		wallGenerator.position = wallsStartPoint;
 		thePlayer.gameObject.SetActive (true);
 
 		theScoreManager.scoreCount = 0;
 		theScoreManager.scoreIncreasing = true;
 	}
-	/*public IEnumerator RestartGameCo(){
-		theScoreManager.scoreIncreasing = false;
-		thePlayer.gameObject.SetActive (false);
-		yield return new WaitForSeconds (0.5f);
-		wallList = FindObjectsOfType<WallDestroyer> ();
-		for (int i = 0; i < wallList.Length; i++) {
-			wallList [i].gameObject.SetActive (false);
-		}
-		thePlayer.transform.position = playerStartPoint;
-		wallGeneratorLeft.position = wallsStartPointLeft;
-		wallGeneratorRight.position = wallsStartPointRight;
-		thePlayer.gameObject.SetActive (true);
-
-		theScoreManager.scoreCount = 0;
-		theScoreManager.scoreIncreasing = true;
-	}*/
 }

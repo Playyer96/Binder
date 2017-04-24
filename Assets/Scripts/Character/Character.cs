@@ -56,5 +56,10 @@ public class Character : MonoBehaviour
 			speedMilestoneCount = speedMilestoneCountStore;
 			speedIncreaseMilestone = speedIncreaseMilestoneStore;
 		}
+        if(other.gameObject.tag == "PowerUp")
+        {
+            GetComponent<Shoot>().enabled=true;
+            other.gameObject.SetActive(false);
+        }
 	}
 }

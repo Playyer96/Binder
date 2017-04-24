@@ -7,11 +7,10 @@ public class WallDestroyer : MonoBehaviour {
 	private GameObject wallDestructionPoint;
 
 	void Start () {
-	wallDestructionPoint=GameObject.Find("WallDestructionPoint");
+        wallDestructionPoint = GameObject.Find("WallDestructionPoint");
 	}
 	void Update () {
-	if(transform.position.z<wallDestructionPoint.transform.position.z){
-            //Destroy(gameObject);
+	    if(transform.position.z<wallDestructionPoint.transform.position.z){
             gameObject.SetActive(false);
 		}
 	}

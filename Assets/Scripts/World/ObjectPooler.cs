@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ObjectPooler : MonoBehaviour {
+
     [SerializeField]
     private GameObject wallPooled;
 
@@ -20,6 +21,7 @@ public class ObjectPooler : MonoBehaviour {
             pooledWalls.Add(obj);
         }
 	}
+
     public GameObject GetPooledObject()
     {
         for (int i = 0; i < pooledWalls.Count; i++)
